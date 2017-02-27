@@ -13,6 +13,8 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com"), consumerKey: 	"0BE59xDSsRWCks6dyh7K1gOnM", consumerSecret: "jGnYjWylK2L7kDjLUTS6h6LASiY9tYrKjxK2tQyEQtdK46plAZ")
     
+    static var max_id: Int?
+    static var since_id: Int?
     
     var loginSuccess: (() -> ())?
     var loginFailure: ((Error) -> ())?
@@ -81,6 +83,12 @@ class TwitterClient: BDBOAuth1SessionManager {
                 
                 let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
                 
+                let firstTweet: Tweet = tweets[0]
+                let lastTweet: Tweet = tweets[tweets.count-1]
+                
+                TwitterClient.since_id = firstTweet.id
+                TwitterClient.max_id = lastTweet.id
+                
                 success(tweets)
             }
             
@@ -92,6 +100,69 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
+    func scrollDownToGetOldTweets(success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+        
+        get("1.1/statuses/home_timeline.json", parameters: ["max_id" : TwitterClient.max_id], progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            
+            
+            if let response = response {
+                
+                let dictionaries = response as! [NSDictionary]
+                
+                let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
+                
+                let lastTweet: Tweet = tweets[tweets.count-1]
+                
+                TwitterClient.max_id = lastTweet.id
+                
+                success(tweets)
+            }
+            
+            
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            
+            failure(error)
+            
+        })
+    }
+    
+    func pullToGetNewTweets(success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+        
+        get("1.1/statuses/home_timeline.json", parameters: ["since_id" : TwitterClient.since_id], progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            
+            
+            if let response = response as? NSArray {
+                
+                if response.count == 0 {
+                    success([])
+                    return
+                }
+                
+                print("Pull to refresh response: \(response)")
+                
+                let dictionaries = response as! [NSDictionary]
+                
+                let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
+                
+                let firstTweet: Tweet = tweets[0]
+                
+                TwitterClient.since_id = firstTweet.id
+                
+                success(tweets)
+            }
+            
+            
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            
+            failure(error)
+            
+        })
+    }
+    
+    
+    
+    
+    
     func favorite(id: Int, success: @escaping (NSDictionary) -> (), failure: @escaping (Error) -> ()) {
         post("https://api.twitter.com/1.1/favorites/create.json", parameters: ["id": id], progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
             
@@ -99,6 +170,23 @@ class TwitterClient: BDBOAuth1SessionManager {
                 
                 let tweet = response as! NSDictionary
 
+                success(tweet)
+            }
+            
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            
+            failure(error)
+            
+        })
+    }
+    
+    func unfavorite(id: Int, success: @escaping (NSDictionary) -> (), failure: @escaping (Error) -> ()) {
+        post("https://api.twitter.com/1.1/favorites/destroy.json", parameters: ["id": id], progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            
+            if let response = response {
+                
+                let tweet = response as! NSDictionary
+                
                 success(tweet)
             }
             

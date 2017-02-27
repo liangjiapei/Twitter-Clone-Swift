@@ -238,24 +238,21 @@ class TweetTableViewCell: UITableViewCell {
         print("Favorite button tapped")
         
         if isFavorite {
-            print("To disfavor")
-            isFavorite = false
-            favoriteButton.setImage(UIImage(named: "favor-icon"), for: .normal)
-            favoriteCountLabel.textColor = UIColor.gray
+            print("To unfavor")
             
-            if let favoriteCountLabelText = favoriteCountLabel.text {
-                if !favoriteCountLabelText.isEmpty {
-                    if let favoriteCount = Int(favoriteCountLabelText) {
-                        if favoriteCount - 1 == 0 {
-                            favoriteCountLabel.text = ""
-                        } else {
-                            favoriteCountLabel.text = "\(favoriteCount - 1)"
-                        }
-                    }
-                } else {
-                    // do nothing
-                }
+            if let id = tweet.id {
+                TwitterClient.sharedInstance?.unfavorite(id: id, success: { (tweet) in
+                    
+                    self.handleUnfavorite();
+                    
+                }, failure: { (error: Error) in
+                    
+                    print("Failed to favorite")
+                    print("error: \(error.localizedDescription)")
+                    
+                })
             }
+            
         } else {
             print("To favor")
             
@@ -297,6 +294,28 @@ class TweetTableViewCell: UITableViewCell {
                 favoriteCountLabel.text = "1"
             }
         }
+    }
+    
+    func handleUnfavorite() {
+        
+        isFavorite = false
+        favoriteButton.setImage(UIImage(named: "favor-icon"), for: .normal)
+        favoriteCountLabel.textColor = UIColor.gray
+        
+        if let favoriteCountLabelText = favoriteCountLabel.text {
+            if !favoriteCountLabelText.isEmpty {
+                if let favoriteCount = Int(favoriteCountLabelText) {
+                    if favoriteCount - 1 == 0 {
+                        favoriteCountLabel.text = ""
+                    } else {
+                        favoriteCountLabel.text = "\(favoriteCount - 1)"
+                    }
+                }
+            } else {
+                // do nothing
+            }
+        }
+        
     }
     
     func handleRetweet() {
