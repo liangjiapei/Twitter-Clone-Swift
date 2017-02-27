@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5307307B1E63681300A57BAB /* DateStringFormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5307307A1E63681300A57BAB /* DateStringFormatHelper.swift */; };
 		5346DBFE1E394504003AD5F6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5346DBFD1E394504003AD5F6 /* User.swift */; };
 		5346DC011E394520003AD5F6 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5346DC001E394520003AD5F6 /* Tweet.swift */; };
 		536FACC81E392958009982F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536FACC71E392958009982F2 /* AppDelegate.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5307307A1E63681300A57BAB /* DateStringFormatHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateStringFormatHelper.swift; sourceTree = "<group>"; };
 		5346DBFD1E394504003AD5F6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5346DC001E394520003AD5F6 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		536FACC41E392958009982F2 /* Twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +52,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		530730791E6367DC00A57BAB /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				5307307A1E63681300A57BAB /* DateStringFormatHelper.swift */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
 		5346DBFA1E3944CE003AD5F6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +107,7 @@
 		536FACC61E392958009982F2 /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
+				530730791E6367DC00A57BAB /* Helper */,
 				53B8AEE91E5D505E0075FF61 /* Views */,
 				5346DBFC1E3944E0003AD5F6 /* View Controllers */,
 				5346DBFB1E3944DA003AD5F6 /* API */,
@@ -264,6 +275,7 @@
 				536FACDA1E393252009982F2 /* LoginViewController.swift in Sources */,
 				53B8AEE81E5D1D3F0075FF61 /* TweetsViewController.swift in Sources */,
 				53B8AEE61E5D0F9D0075FF61 /* TwitterClient.swift in Sources */,
+				5307307B1E63681300A57BAB /* DateStringFormatHelper.swift in Sources */,
 				536FACC81E392958009982F2 /* AppDelegate.swift in Sources */,
 				53B8AEEB1E5D549F0075FF61 /* TweetTableViewCell.swift in Sources */,
 			);
@@ -331,7 +343,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -374,7 +386,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

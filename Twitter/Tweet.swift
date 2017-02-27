@@ -10,27 +10,34 @@ import UIKit
 
 class Tweet: NSObject {
 
+    var id: Int?
     var text: String?
     var timestamp: Date?
     var retweetCount: Int = 0
-    var favoritesCount: Int = 0
+    var favoriteCount: Int = 0
     var name: String?
     var screenName: String?
     var profileImageUrl: URL?
     var favorited: Bool?
+    var retweeted: Bool?
     var entities: NSDictionary?
     var urls: NSDictionary?
     var url: String?
     var displayUrl: String?
+    var created_at: String?
     
     init(dictionary: NSDictionary) {
         print(dictionary)
         
+        id = (dictionary["id"] as? Int) ?? 0
+        
         text = dictionary["text"] as? String
         
-        entities = dictionary["entities"] as? NSDictionary
+        created_at = dictionary["created_at"] as? String
         
-        print("my entities: \(entities)")
+        print("my created_at: \(created_at!)")
+        
+        entities = dictionary["entities"] as? NSDictionary
         
         let temp = entities?["urls"] as? NSArray
         
@@ -42,9 +49,11 @@ class Tweet: NSObject {
         
         favorited = dictionary["favorited"] as? Bool
         
+        retweeted = dictionary["retweeted"] as? Bool
+        
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
         
-        favoritesCount = (dictionary["favourites_count"] as? Int) ?? 0
+        favoriteCount = (dictionary["favorite_count"] as? Int) ?? 0
         
         let user: NSDictionary = (dictionary["user"] as? NSDictionary) ?? [:]
         

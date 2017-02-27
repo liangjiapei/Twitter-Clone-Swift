@@ -92,6 +92,40 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
+    func favorite(id: Int, success: @escaping (NSDictionary) -> (), failure: @escaping (Error) -> ()) {
+        post("https://api.twitter.com/1.1/favorites/create.json", parameters: ["id": id], progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            
+            if let response = response {
+                
+                let tweet = response as! NSDictionary
+
+                success(tweet)
+            }
+            
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            
+            failure(error)
+            
+        })
+    }
+    
+    func retweet(id: Int, success: @escaping (NSDictionary) -> (), failure: @escaping (Error) -> ()) {
+        post("https://api.twitter.com/1.1/statuses/retweet/\(id).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            
+            if let response = response {
+                
+                let tweet = response as! NSDictionary
+                
+                success(tweet)
+            }
+            
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            
+            failure(error)
+            
+        })
+    }
+    
     func currentAccount(success: @escaping (User) -> (), failure: @escaping (Error) -> ()) {
         get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
             
