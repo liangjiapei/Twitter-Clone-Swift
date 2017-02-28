@@ -22,6 +22,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Added image view to navigation title
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         imageView.contentMode = .scaleAspectFit
         let image = UIImage(named: "twitter")
@@ -46,6 +47,8 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         insets.bottom += InfiniteScrollActivityView.defaultHeight
         tableView.contentInset = insets
 
+        
+        // Get homeline tweets
         TwitterClient.sharedInstance?.homeTimeline(success: { (tweets: [Tweet]) in
             
             self.tweets = tweets

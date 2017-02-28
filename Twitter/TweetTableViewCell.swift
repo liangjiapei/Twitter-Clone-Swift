@@ -35,172 +35,7 @@ class TweetTableViewCell: UITableViewCell {
     var tweet: Tweet! {
         didSet {
             
-            
-            
-            for view in leftImageStackView.subviews {
-                view.removeFromSuperview()
-            }
-            
-            /*
-            for view in rightImageStackView.subviews {
-                view.removeFromSuperview()
-            }
-            */
-            
-            if tweet.media != nil {
-                let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImageView))
-                
-                imageStackHeightConstraint.constant = imageStackView.frame.width * 0.6
-                
-                imageStackView.distribution = .fill
-                
-                let imageView1 = UIImageView(image: UIImage(named: "default_image"))
-                imageView1.contentMode = .scaleAspectFill
-                imageView1.clipsToBounds = true
-                imageView1.layer.cornerRadius = 10
-                imageView1.isUserInteractionEnabled = true
-                imageView1.addGestureRecognizer(tapRecognizer)
-                
-                
-                if let mediaUrl = tweet.mediaUrl {
-                    imageView1.setImageWith(mediaUrl)
-                    
-                    leftImageStackView.addArrangedSubview(imageView1)
-                }
-            } else {
-                imageStackHeightConstraint.constant = 0
-            }
-            
-            
-            
-            /*
-            let pikachuImageView2 = UIImageView(image: UIImage(named: "pikachu"))
-            pikachuImageView2.contentMode = .scaleAspectFill
-            pikachuImageView2.clipsToBounds = true
-            
-            let pikachuImageView3 = UIImageView(image: UIImage(named: "pikachu"))
-            pikachuImageView3.contentMode = .scaleAspectFill
-            pikachuImageView3.clipsToBounds = true
-            
-            let pikachuImageView4 = UIImageView(image: UIImage(named: "pikachu"))
-            pikachuImageView4.contentMode = .scaleAspectFill
-            pikachuImageView4.clipsToBounds = true
-            */
- 
-            
-            
-            /*
-            leftImageStackView.addArrangedSubview(pikachuImageView4)
-            
-            rightImageStackView.addArrangedSubview(pikachuImageView2)
-            
-            rightImageStackView.addArrangedSubview(pikachuImageView3)
-            
-            self.layoutIfNeeded()
-            */
- 
-            if let text = tweet.text {
-                if let url = tweet.url {
-                    if let displayUrl = tweet.displayUrl {
-                        tweetTextLabel.text = text.replacingCharacters(in: text.range(of: url)!, with: displayUrl)
-                        
-                        let urlType = ActiveType.custom(pattern: tweet.displayUrl!)
-                        tweetTextLabel.enabledTypes.append(urlType)
-                        
-                        tweetTextLabel.customColor[urlType] = UIColor(red: 66/255, green: 173.0/255, blue: 244/255, alpha: 1)
-                        
-                        tweetTextLabel.customSelectedColor[urlType] = UIColor(red: 66/255, green: 140.0/255, blue: 244/255, alpha: 1)
-                        
-                        tweetTextLabel.handleCustomTap(for: urlType, handler: {
-                            (urlString) in
-                            print(urlString)
-                            UIApplication.shared.open(URL(string: self.tweet.expandedUrl!)!, options: [:])
-                            print(UIApplication.shared.canOpenURL(URL(string: self.tweet.expandedUrl!)!))
-                        })
-                    }
-                } else {
-                    tweetTextLabel.text = tweet.text
-                }
-            }
-            
-            
-            
-            if let dateStr = tweet.created_at {
-                let timeDiff = DateStringFormatHelper.getTimeSinceNow(dateStr: dateStr)
-                timeLabel.text = "· \(timeDiff)"
-            }
-        
-            nameLabel.text = tweet.name
-            
-            if tweet.favorited! {
-                print("Favorited already")
-                isFavorite = true
-                favoriteButton.setImage(UIImage(named: "favor-icon-red"), for: .normal)
-                favoriteCountLabel.textColor = UIColor(red: 0.88, green: 0.23, blue: 0.40, alpha: 1.0)
-            } else {
-                print("Not Favorited")
-                isFavorite = false
-                favoriteButton.setImage(UIImage(named: "favor-icon"), for: .normal)
-                favoriteCountLabel.textColor = UIColor.gray
-            }
-            
-            if tweet.retweeted! {
-                print("Retweeted already")
-                isRetweeted = true
-                retweetButton.setImage(UIImage(named: "retweet-icon-green"), for: .normal)
-                retweetCountLabel.textColor = UIColor(red: 0.11, green: 0.75, blue: 0.50, alpha: 1.0)
-            } else {
-                print("Not Retweeted")
-                isRetweeted = false
-                retweetButton.setImage(UIImage(named: "retweet-icon"), for: .normal)
-                retweetCountLabel.textColor = UIColor.gray
-            }
-            
-            
-            if let screenName = tweet.screenName {
-                screenNameLabel.text = "@\(screenName)"
-            }
-            
-            if let profileUrl = tweet.profileImageUrl {
-                profileImageView.setImageWith(profileUrl)
-            }
-            
-            // tweetTextLabel.text = tweet.text
-            
-            print(tweet.text!)
-            
-            tweetTextLabel.customize { label in
-                label.lineSpacing = 0
-                label.urlMaximumLength = 100
-                label.hashtagColor = UIColor(red: 66/255, green: 173.0/255, blue: 244/255, alpha: 1)
-                label.mentionColor = UIColor(red: 66/255, green: 173.0/255, blue: 244/255, alpha: 1)
-                label.URLColor = UIColor(red: 66/255, green: 173.0/255, blue: 244/255, alpha: 1)
-                label.URLSelectedColor = UIColor(red: 66/255, green: 140.0/255, blue: 244/255, alpha: 1)
-                label.mentionSelectedColor = UIColor(red: 66/255, green: 140.0/255, blue: 244/255, alpha: 1)
-                label.hashtagSelectedColor = UIColor(red: 66/255, green: 140.0/255, blue: 244/255, alpha: 1)
-                
-                /*
-                label.handleMentionTap { _ in print("Tapped Mention") }
-                label.handleHashtagTap { _ in print("Tapped Hashtag") }
-                label.handleURLTap { (url) in
-                    print("Tapped URL")
-                    UIApplication.shared.open(url, options: [:])
-                }
-                */
-            }
-            
-            if tweet.retweetCount == 0 {
-                retweetCountLabel.text = ""
-            } else {
-                retweetCountLabel.text = "\(tweet.retweetCount)"
-            }
-            
-            if tweet.favoriteCount == 0 {
-                favoriteCountLabel.text = ""
-            } else {
-                favoriteCountLabel.text = "\(tweet.favoriteCount)"
-            }
-            
+            updateUI()
             
         }
     }
@@ -213,11 +48,9 @@ class TweetTableViewCell: UITableViewCell {
         // Rounded corner profile image view
         profileImageView.layer.cornerRadius = 5
         profileImageView.clipsToBounds = true
-        
-        
-        
-
     }
+    
+    
     
     func onTapImageView() {
         print("Tap image")
@@ -228,9 +61,6 @@ class TweetTableViewCell: UITableViewCell {
     }
     
     
-    
-    
-    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -238,9 +68,13 @@ class TweetTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
+    
     @IBAction func onReplyButton(_ sender: Any) {
         print("Reply button tapped")
     }
+    
+    
     
     @IBAction func onRetweetButton(_ sender: Any) {
         print("Retweet button tapped")
@@ -278,6 +112,8 @@ class TweetTableViewCell: UITableViewCell {
             }
         }
     }
+    
+    
     
     @IBAction func onFavoriteButton(_ sender: Any) {
         
@@ -322,9 +158,13 @@ class TweetTableViewCell: UITableViewCell {
         
     }
     
+    
+    
     @IBAction func onMessageButton(_ sender: Any) {
         print("Message button tapped")
     }
+    
+    
     
     func handleFavorite() {
         isFavorite = true
@@ -341,6 +181,8 @@ class TweetTableViewCell: UITableViewCell {
             }
         }
     }
+    
+    
     
     func handleUnfavorite() {
         
@@ -364,6 +206,8 @@ class TweetTableViewCell: UITableViewCell {
         
     }
     
+    
+    
     func handleRetweet() {
         
         isRetweeted = true
@@ -381,6 +225,8 @@ class TweetTableViewCell: UITableViewCell {
         }
         
     }
+    
+    
     
     func handleUnretweet() {
         isRetweeted = false
@@ -402,8 +248,173 @@ class TweetTableViewCell: UITableViewCell {
         }
     }
     
-    
-    
+    func updateUI() {
+        
+        for view in leftImageStackView.subviews {
+            view.removeFromSuperview()
+        }
+        
+        /*
+         for view in rightImageStackView.subviews {
+         view.removeFromSuperview()
+         }
+         */
+        
+        if tweet.media != nil {
+            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImageView))
+            
+            imageStackHeightConstraint.constant = imageStackView.frame.width * 0.6
+            
+            imageStackView.distribution = .fill
+            
+            let imageView1 = UIImageView(image: UIImage(named: "default_image"))
+            imageView1.contentMode = .scaleAspectFill
+            imageView1.clipsToBounds = true
+            imageView1.layer.cornerRadius = 10
+            imageView1.isUserInteractionEnabled = true
+            imageView1.addGestureRecognizer(tapRecognizer)
+            
+            
+            if let mediaUrl = tweet.mediaUrl {
+                imageView1.setImageWith(mediaUrl)
+                
+                leftImageStackView.addArrangedSubview(imageView1)
+            }
+        } else {
+            imageStackHeightConstraint.constant = 0
+        }
+        
+        
+        
+        /*
+         let pikachuImageView2 = UIImageView(image: UIImage(named: "pikachu"))
+         pikachuImageView2.contentMode = .scaleAspectFill
+         pikachuImageView2.clipsToBounds = true
+         
+         let pikachuImageView3 = UIImageView(image: UIImage(named: "pikachu"))
+         pikachuImageView3.contentMode = .scaleAspectFill
+         pikachuImageView3.clipsToBounds = true
+         
+         let pikachuImageView4 = UIImageView(image: UIImage(named: "pikachu"))
+         pikachuImageView4.contentMode = .scaleAspectFill
+         pikachuImageView4.clipsToBounds = true
+         */
+        
+        
+        
+        /*
+         leftImageStackView.addArrangedSubview(pikachuImageView4)
+         
+         rightImageStackView.addArrangedSubview(pikachuImageView2)
+         
+         rightImageStackView.addArrangedSubview(pikachuImageView3)
+         
+         self.layoutIfNeeded()
+         */
+        
+        if let text = tweet.text {
+            if let url = tweet.url {
+                if let displayUrl = tweet.displayUrl {
+                    tweetTextLabel.text = text.replacingCharacters(in: text.range(of: url)!, with: displayUrl)
+                    
+                    let urlType = ActiveType.custom(pattern: tweet.displayUrl!)
+                    tweetTextLabel.enabledTypes.append(urlType)
+                    
+                    tweetTextLabel.customColor[urlType] = UIColor(red: 66/255, green: 173.0/255, blue: 244/255, alpha: 1)
+                    
+                    tweetTextLabel.customSelectedColor[urlType] = UIColor(red: 66/255, green: 140.0/255, blue: 244/255, alpha: 1)
+                    
+                    tweetTextLabel.handleCustomTap(for: urlType, handler: {
+                        (urlString) in
+                        print(urlString)
+                        UIApplication.shared.open(URL(string: self.tweet.expandedUrl!)!, options: [:])
+                        print(UIApplication.shared.canOpenURL(URL(string: self.tweet.expandedUrl!)!))
+                    })
+                }
+            } else {
+                tweetTextLabel.text = tweet.text
+            }
+        }
+        
+        
+        
+        if let dateStr = tweet.created_at {
+            let timeDiff = DateStringFormatHelper.getTimeSinceNow(dateStr: dateStr)
+            timeLabel.text = "· \(timeDiff)"
+        }
+        
+        nameLabel.text = tweet.name
+        
+        if tweet.favorited! {
+            print("Favorited already")
+            isFavorite = true
+            favoriteButton.setImage(UIImage(named: "favor-icon-red"), for: .normal)
+            favoriteCountLabel.textColor = UIColor(red: 0.88, green: 0.23, blue: 0.40, alpha: 1.0)
+        } else {
+            print("Not Favorited")
+            isFavorite = false
+            favoriteButton.setImage(UIImage(named: "favor-icon"), for: .normal)
+            favoriteCountLabel.textColor = UIColor.gray
+        }
+        
+        if tweet.retweeted! {
+            print("Retweeted already")
+            isRetweeted = true
+            retweetButton.setImage(UIImage(named: "retweet-icon-green"), for: .normal)
+            retweetCountLabel.textColor = UIColor(red: 0.11, green: 0.75, blue: 0.50, alpha: 1.0)
+        } else {
+            print("Not Retweeted")
+            isRetweeted = false
+            retweetButton.setImage(UIImage(named: "retweet-icon"), for: .normal)
+            retweetCountLabel.textColor = UIColor.gray
+        }
+        
+        
+        if let screenName = tweet.screenName {
+            screenNameLabel.text = "@\(screenName)"
+        }
+        
+        if let profileUrl = tweet.profileImageUrl {
+            profileImageView.setImageWith(profileUrl)
+        }
+        
+        // tweetTextLabel.text = tweet.text
+        
+        print(tweet.text!)
+        
+        tweetTextLabel.customize { label in
+            label.lineSpacing = 0
+            label.urlMaximumLength = 100
+            label.hashtagColor = UIColor(red: 66/255, green: 173.0/255, blue: 244/255, alpha: 1)
+            label.mentionColor = UIColor(red: 66/255, green: 173.0/255, blue: 244/255, alpha: 1)
+            label.URLColor = UIColor(red: 66/255, green: 173.0/255, blue: 244/255, alpha: 1)
+            label.URLSelectedColor = UIColor(red: 66/255, green: 140.0/255, blue: 244/255, alpha: 1)
+            label.mentionSelectedColor = UIColor(red: 66/255, green: 140.0/255, blue: 244/255, alpha: 1)
+            label.hashtagSelectedColor = UIColor(red: 66/255, green: 140.0/255, blue: 244/255, alpha: 1)
+            
+            /*
+             label.handleMentionTap { _ in print("Tapped Mention") }
+             label.handleHashtagTap { _ in print("Tapped Hashtag") }
+             label.handleURLTap { (url) in
+             print("Tapped URL")
+             UIApplication.shared.open(url, options: [:])
+             }
+             */
+        }
+        
+        if tweet.retweetCount == 0 {
+            retweetCountLabel.text = ""
+        } else {
+            retweetCountLabel.text = "\(tweet.retweetCount)"
+        }
+        
+        if tweet.favoriteCount == 0 {
+            favoriteCountLabel.text = ""
+        } else {
+            favoriteCountLabel.text = "\(tweet.favoriteCount)"
+        }
+        
+    }
 }
 
 extension NSMutableAttributedString {
