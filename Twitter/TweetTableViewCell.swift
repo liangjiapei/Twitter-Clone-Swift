@@ -38,16 +38,33 @@ class TweetTableViewCell: UITableViewCell {
                 view.removeFromSuperview()
             }
             
+            /*
             for view in rightImageStackView.subviews {
                 view.removeFromSuperview()
             }
+            */
             
-            imageStackHeightConstraint.constant = imageStackView.frame.width * 0.6
+            if tweet.media != nil {
+                imageStackHeightConstraint.constant = imageStackView.frame.width * 0.6
+                
+                imageStackView.distribution = .fill
+                
+                let pikachuImageView1 = UIImageView(image: UIImage(named: "default_image"))
+                pikachuImageView1.contentMode = .scaleAspectFill
+                pikachuImageView1.clipsToBounds = true
+                
+                if let mediaUrl = tweet.mediaUrl {
+                    pikachuImageView1.setImageWith(mediaUrl)
+                    
+                    leftImageStackView.addArrangedSubview(pikachuImageView1)
+                }
+            } else {
+                imageStackHeightConstraint.constant = 0
+            }
             
-            let pikachuImageView1 = UIImageView(image: UIImage(named: "pikachu"))
-            pikachuImageView1.contentMode = .scaleAspectFill
-            pikachuImageView1.clipsToBounds = true
             
+            
+            /*
             let pikachuImageView2 = UIImageView(image: UIImage(named: "pikachu"))
             pikachuImageView2.contentMode = .scaleAspectFill
             pikachuImageView2.clipsToBounds = true
@@ -59,9 +76,11 @@ class TweetTableViewCell: UITableViewCell {
             let pikachuImageView4 = UIImageView(image: UIImage(named: "pikachu"))
             pikachuImageView4.contentMode = .scaleAspectFill
             pikachuImageView4.clipsToBounds = true
-        
-            leftImageStackView.addArrangedSubview(pikachuImageView1)
+            */
+ 
             
+            
+            /*
             leftImageStackView.addArrangedSubview(pikachuImageView4)
             
             rightImageStackView.addArrangedSubview(pikachuImageView2)
@@ -69,7 +88,8 @@ class TweetTableViewCell: UITableViewCell {
             rightImageStackView.addArrangedSubview(pikachuImageView3)
             
             self.layoutIfNeeded()
-            
+            */
+ 
             if let text = tweet.text {
                 if let url = tweet.url {
                     if let displayUrl = tweet.displayUrl {
@@ -85,6 +105,8 @@ class TweetTableViewCell: UITableViewCell {
                         tweetTextLabel.handleCustomTap(for: urlType, handler: {
                             (urlString) in
                             print(urlString)
+                            UIApplication.shared.open(URL(string: self.tweet.expandedUrl!)!, options: [:])
+                            print(UIApplication.shared.canOpenURL(URL(string: self.tweet.expandedUrl!)!))
                         })
                     }
                 } else {
@@ -147,9 +169,15 @@ class TweetTableViewCell: UITableViewCell {
                 label.URLSelectedColor = UIColor(red: 66/255, green: 140.0/255, blue: 244/255, alpha: 1)
                 label.mentionSelectedColor = UIColor(red: 66/255, green: 140.0/255, blue: 244/255, alpha: 1)
                 label.hashtagSelectedColor = UIColor(red: 66/255, green: 140.0/255, blue: 244/255, alpha: 1)
+                
+                /*
                 label.handleMentionTap { _ in print("Tapped Mention") }
                 label.handleHashtagTap { _ in print("Tapped Hashtag") }
-                label.handleURLTap { _ in print("Tapped URL") }
+                label.handleURLTap { (url) in
+                    print("Tapped URL")
+                    UIApplication.shared.open(url, options: [:])
+                }
+                */
             }
             
             if tweet.retweetCount == 0 {
@@ -197,22 +225,19 @@ class TweetTableViewCell: UITableViewCell {
         print("Retweet button tapped")
         if isRetweeted {
             print("To unretweet")
-            isRetweeted = false
-            retweetButton.setImage(UIImage(named: "retweet-icon"), for: .normal)
-            retweetCountLabel.textColor = UIColor.gray
             
-            if let retweetCountLabelText = retweetCountLabel.text {
-                if !retweetCountLabelText.isEmpty {
-                    if let retweetCount = Int(retweetCountLabelText) {
-                        if retweetCount - 1 == 0 {
-                            retweetCountLabel.text = ""
-                        } else {
-                            retweetCountLabel.text = "\(retweetCount - 1)"
-                        }
-                    }
-                } else {
-                    // do nothing
-                }
+            if let id = tweet.id {
+                
+                TwitterClient.sharedInstance?.unretweet(id: id, success: { (tweet) in
+                    
+                    self.handleUnretweet();
+                    
+                }, failure: { (error: Error) in
+                    
+                    print("Failed to retweet")
+                    print("error: \(error.localizedDescription)")
+                    
+                })
             }
         } else {
             print("To retweet")
@@ -334,6 +359,26 @@ class TweetTableViewCell: UITableViewCell {
             }
         }
         
+    }
+    
+    func handleUnretweet() {
+        isRetweeted = false
+        retweetButton.setImage(UIImage(named: "retweet-icon"), for: .normal)
+        retweetCountLabel.textColor = UIColor.gray
+        
+        if let retweetCountLabelText = retweetCountLabel.text {
+            if !retweetCountLabelText.isEmpty {
+                if let retweetCount = Int(retweetCountLabelText) {
+                    if retweetCount - 1 == 0 {
+                        retweetCountLabel.text = ""
+                    } else {
+                        retweetCountLabel.text = "\(retweetCount - 1)"
+                    }
+                }
+            } else {
+                // do nothing
+            }
+        }
     }
 }
 

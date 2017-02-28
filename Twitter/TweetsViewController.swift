@@ -20,6 +20,14 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        imageView.contentMode = .scaleAspectFit
+        let image = UIImage(named: "twitter")
+        imageView.image = image
+        imageView.layer.cornerRadius = 15
+        imageView.clipsToBounds = true
+        navigationItem.titleView = imageView
+        
         // Initialize tableView
         tableView.delegate = self
         tableView.dataSource = self

@@ -23,25 +23,58 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LkU-bf-sWW">
-                                <rect key="frame" x="98" y="530" width="218" height="68"/>
-                                <color key="backgroundColor" red="0.43134131073787951" green="0.885102071972515" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="48" y="530" width="317" height="68"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="68" id="RMx-wO-ron"/>
-                                    <constraint firstAttribute="width" constant="218" id="nVv-io-r1b"/>
+                                    <constraint firstAttribute="width" constant="317" id="nVv-io-r1b"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Login with Twitter">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" red="0.029095231199999998" green="0.73374227489999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="onLoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hqz-AZ-wAJ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cmi-x4-kDm">
+                                <rect key="frame" x="48" y="180" width="251" height="108"/>
+                                <string key="text">Welcome to
+Twitter</string>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDf-fy-EAg">
+                                <rect key="frame" x="48" y="310" width="256" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">See what's happening in the
+world right now</string>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitter_white" translatesAutoresizingMaskIntoConstraints="NO" id="RHv-KZ-tyI">
+                                <rect key="frame" x="48" y="49" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="N5H-w5-QpA"/>
+                                    <constraint firstAttribute="height" constant="50" id="lHP-WV-Mud"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.70744091956100164" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="LkU-bf-sWW" secondAttribute="bottom" constant="138" id="FSF-3d-Ade"/>
+                            <constraint firstItem="RHv-KZ-tyI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="29" id="Fer-Ie-hOp"/>
                             <constraint firstItem="LkU-bf-sWW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KRL-ej-WfT"/>
+                            <constraint firstItem="RHv-KZ-tyI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="28" id="dCg-l1-O5u"/>
+                            <constraint firstItem="Cmi-x4-kDm" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="160" id="oLq-qI-PUK"/>
+                            <constraint firstItem="Cmi-x4-kDm" firstAttribute="leading" secondItem="LkU-bf-sWW" secondAttribute="leading" id="wgV-UF-hn6"/>
                         </constraints>
                     </view>
                     <connections>
@@ -50,7 +83,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="133.59999999999999" y="137.18140929535232"/>
+            <point key="canvasLocation" x="133.33333333333334" y="136.95652173913044"/>
         </scene>
         <!--Tweets View Controller-->
         <scene sceneID="7Bc-FJ-pzs">
@@ -118,10 +151,7 @@
                                                     <rect key="frame" x="73" y="53.333333333333329" width="331" height="45.999999999999986"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="N0d-B2-gCb">
-                                                            <rect key="frame" x="0.0" y="0.0" width="160.66666666666666" height="45.999999999999993"/>
-                                                        </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Kak-G0-tkW">
-                                                            <rect key="frame" x="170.66666666666663" y="0.0" width="160.33333333333337" height="45.999999999999993"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="331" height="45.999999999999993"/>
                                                         </stackView>
                                                     </subviews>
                                                     <constraints>
@@ -232,7 +262,6 @@
                                             <outlet property="profileImageView" destination="9dD-Kb-a6t" id="d9L-JZ-pqP"/>
                                             <outlet property="retweetButton" destination="haR-O9-xvP" id="3eo-Jf-OjR"/>
                                             <outlet property="retweetCountLabel" destination="WYD-j8-7QM" id="EBF-Vb-JTy"/>
-                                            <outlet property="rightImageStackView" destination="Kak-G0-tkW" id="LDm-D8-8Wm"/>
                                             <outlet property="screenNameLabel" destination="ui4-4D-KfO" id="vJX-Ua-BPX"/>
                                             <outlet property="timeLabel" destination="CoB-ph-UHr" id="Nf1-4u-v5S"/>
                                             <outlet property="tweetTextLabel" destination="ER3-bk-oB8" id="dok-Js-0VT"/>
@@ -253,6 +282,7 @@
                         <barButtonItem title="Item" id="dYo-vj-7oT"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="78u-cE-DJj">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="XVB-L6-8c0">
                             <connections>
                                 <action selector="onLogoutButton:" destination="jRr-dd-lOO" id="fJU-hz-MNb"/>
@@ -293,5 +323,6 @@
         <image name="message-icon" width="30" height="30"/>
         <image name="reply-icon" width="30" height="30"/>
         <image name="retweet-icon" width="30" height="30"/>
+        <image name="twitter_white" width="512" height="512"/>
     </resources>
 </document>

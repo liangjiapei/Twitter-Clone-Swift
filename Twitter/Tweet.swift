@@ -24,7 +24,10 @@ class Tweet: NSObject {
     var urls: NSDictionary?
     var url: String?
     var displayUrl: String?
+    var expandedUrl: String?
     var created_at: String?
+    var media: NSDictionary?
+    var mediaUrl: URL?
     
     init(dictionary: NSDictionary) {
         print(dictionary)
@@ -39,13 +42,24 @@ class Tweet: NSObject {
         
         entities = dictionary["entities"] as? NSDictionary
         
-        let temp = entities?["urls"] as? NSArray
+        let urlsTemp = entities?["urls"] as? NSArray
         
-        if temp != nil && temp?.count != 0 {
-            urls = temp![0] as! NSDictionary
+        if urlsTemp != nil && urlsTemp?.count != 0 {
+            urls = urlsTemp![0] as! NSDictionary
             url = urls!["url"] as? String
             displayUrl = urls!["display_url"] as? String
+            expandedUrl = urls!["expanded_url"] as? String
         }
+        
+        let mediaTemp = entities?["media"] as? NSArray
+        
+        if mediaTemp != nil && mediaTemp?.count != 0 {
+            media = mediaTemp![0] as! NSDictionary
+            let mediaUrlString = media!["media_url"] as! String
+            mediaUrl = URL(string: mediaUrlString)!
+        }
+        
+        
         
         favorited = dictionary["favorited"] as? Bool
         
