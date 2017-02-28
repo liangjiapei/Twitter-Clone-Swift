@@ -122,13 +122,13 @@ world right now</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="@PurdueCHM261262" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ui4-4D-KfO">
-                                                    <rect key="frame" x="214.99999999999997" y="5" width="84.333333333333286" height="20.333333333333332"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="214.99999999999997" y="5" width="92.333333333333286" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nMd-Zq-lfR">
-                                                    <rect key="frame" x="388" y="7.6666666666666679" width="15" height="15"/>
+                                                    <rect key="frame" x="388" y="6.6666666666666679" width="15" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="AVU-vQ-z9W"/>
                                                         <constraint firstAttribute="width" constant="15" id="oMR-eq-PHP"/>
@@ -136,19 +136,19 @@ world right now</string>
                                                     <state key="normal" image="arrowdown"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016/4/27" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CoB-ph-UHr">
-                                                    <rect key="frame" x="304.33333333333326" y="5" width="78.666666666666686" height="20.333333333333332"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="312.33333333333326" y="5" width="70.666666666666686" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ER3-bk-oB8" customClass="ActiveLabel" customModule="ActiveLabel">
-                                                    <rect key="frame" x="73" y="24.333333333333336" width="333" height="21.000000000000007"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="73" y="25" width="321" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0r5-o3-8nP">
-                                                    <rect key="frame" x="73" y="53.333333333333329" width="331" height="45.999999999999986"/>
+                                                    <rect key="frame" x="73" y="52.333333333333329" width="331" height="45.999999999999986"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="N0d-B2-gCb">
                                                             <rect key="frame" x="0.0" y="0.0" width="331" height="45.999999999999993"/>
@@ -160,19 +160,19 @@ world right now</string>
                                                     </constraints>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="241" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYD-j8-7QM">
-                                                    <rect key="frame" x="210.66666666666666" y="114.66666666666666" width="22" height="15.666666666666657"/>
+                                                    <rect key="frame" x="210.66666666666666" y="113.66666666666666" width="22" height="15.666666666666657"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="242" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sm-Gu-ihX" userLabel="Favorite Count Label">
-                                                    <rect key="frame" x="290.33333333333326" y="114.66666666666666" width="23.666666666666686" height="15.666666666666657"/>
+                                                    <rect key="frame" x="290.33333333333326" y="113.66666666666666" width="23.666666666666686" height="15.666666666666657"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="yvp-YR-1uS">
-                                                    <rect key="frame" x="73" y="107.33333333333334" width="331" height="30.000000000000028"/>
+                                                    <rect key="frame" x="73" y="106.33333333333334" width="331" height="30.000000000000028"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Xp5-Fk-jhM">
                                                             <rect key="frame" x="0.0" y="0.0" width="82.666666666666657" height="30.000000000000014"/>
@@ -230,10 +230,10 @@ world right now</string>
                                                 <constraint firstItem="yvp-YR-1uS" firstAttribute="top" secondItem="0r5-o3-8nP" secondAttribute="bottom" constant="8" id="A9a-yR-6oQ"/>
                                                 <constraint firstItem="9dD-Kb-a6t" firstAttribute="leading" secondItem="Dqy-MH-J9K" secondAttribute="leading" constant="11" id="GjQ-3l-ayc"/>
                                                 <constraint firstItem="yvp-YR-1uS" firstAttribute="leading" secondItem="b5R-df-V7o" secondAttribute="leading" id="M5Z-Ld-caF"/>
-                                                <constraint firstItem="ER3-bk-oB8" firstAttribute="top" secondItem="b5R-df-V7o" secondAttribute="bottom" constant="-1" id="Mdx-zq-HQd"/>
+                                                <constraint firstItem="ER3-bk-oB8" firstAttribute="top" secondItem="b5R-df-V7o" secondAttribute="bottom" constant="-0.33333333333333215" id="Mdx-zq-HQd"/>
                                                 <constraint firstItem="WYD-j8-7QM" firstAttribute="centerY" secondItem="haR-O9-xvP" secondAttribute="centerY" id="P1g-cw-Qol"/>
                                                 <constraint firstItem="7sm-Gu-ihX" firstAttribute="leading" secondItem="6q0-ds-VSX" secondAttribute="trailing" constant="-30.333333333333371" id="P6Z-7P-ezb"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="ER3-bk-oB8" secondAttribute="trailing" id="RJ9-ZT-pQp"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ER3-bk-oB8" secondAttribute="trailing" constant="12" id="RJ9-ZT-pQp"/>
                                                 <constraint firstItem="b5R-df-V7o" firstAttribute="leading" secondItem="9dD-Kb-a6t" secondAttribute="trailing" constant="7" id="TPG-zf-l5c"/>
                                                 <constraint firstAttribute="trailing" secondItem="0r5-o3-8nP" secondAttribute="trailing" constant="10" id="WA9-aX-5bM"/>
                                                 <constraint firstItem="ui4-4D-KfO" firstAttribute="leading" secondItem="b5R-df-V7o" secondAttribute="trailing" constant="5" id="WFV-rs-Mld"/>
@@ -245,7 +245,7 @@ world right now</string>
                                                 <constraint firstItem="ui4-4D-KfO" firstAttribute="top" secondItem="b5R-df-V7o" secondAttribute="top" id="fNM-Cx-i94"/>
                                                 <constraint firstItem="7sm-Gu-ihX" firstAttribute="centerY" secondItem="yvp-YR-1uS" secondAttribute="centerY" id="gVB-ep-eAm"/>
                                                 <constraint firstItem="CoB-ph-UHr" firstAttribute="leading" secondItem="ui4-4D-KfO" secondAttribute="trailing" constant="5" id="gu5-bA-jnk"/>
-                                                <constraint firstItem="0r5-o3-8nP" firstAttribute="top" secondItem="ER3-bk-oB8" secondAttribute="bottom" constant="8" id="kk7-mw-8SF"/>
+                                                <constraint firstItem="0r5-o3-8nP" firstAttribute="top" secondItem="ER3-bk-oB8" secondAttribute="bottom" constant="9.3333333333333286" id="kk7-mw-8SF"/>
                                                 <constraint firstItem="ER3-bk-oB8" firstAttribute="leading" secondItem="b5R-df-V7o" secondAttribute="leading" id="l1a-dS-MBS"/>
                                                 <constraint firstAttribute="trailing" secondItem="nMd-Zq-lfR" secondAttribute="trailing" constant="11" id="nGl-gl-YKf"/>
                                                 <constraint firstItem="CoB-ph-UHr" firstAttribute="top" secondItem="ui4-4D-KfO" secondAttribute="top" id="rLD-o2-DPl"/>
