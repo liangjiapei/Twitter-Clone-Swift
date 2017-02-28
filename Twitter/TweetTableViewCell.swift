@@ -28,11 +28,14 @@ class TweetTableViewCell: UITableViewCell {
     var isFavorite = false
     var isRetweeted = false
     
+    var vc: TweetsViewController!
     
     var hasTweetTextView = false
     
     var tweet: Tweet! {
         didSet {
+            
+            
             
             for view in leftImageStackView.subviews {
                 view.removeFromSuperview()
@@ -45,18 +48,24 @@ class TweetTableViewCell: UITableViewCell {
             */
             
             if tweet.media != nil {
+                let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImageView))
+                
                 imageStackHeightConstraint.constant = imageStackView.frame.width * 0.6
                 
                 imageStackView.distribution = .fill
                 
-                let pikachuImageView1 = UIImageView(image: UIImage(named: "default_image"))
-                pikachuImageView1.contentMode = .scaleAspectFill
-                pikachuImageView1.clipsToBounds = true
+                let imageView1 = UIImageView(image: UIImage(named: "default_image"))
+                imageView1.contentMode = .scaleAspectFill
+                imageView1.clipsToBounds = true
+                imageView1.layer.cornerRadius = 10
+                imageView1.isUserInteractionEnabled = true
+                imageView1.addGestureRecognizer(tapRecognizer)
+                
                 
                 if let mediaUrl = tweet.mediaUrl {
-                    pikachuImageView1.setImageWith(mediaUrl)
+                    imageView1.setImageWith(mediaUrl)
                     
-                    leftImageStackView.addArrangedSubview(pikachuImageView1)
+                    leftImageStackView.addArrangedSubview(imageView1)
                 }
             } else {
                 imageStackHeightConstraint.constant = 0
@@ -209,6 +218,18 @@ class TweetTableViewCell: UITableViewCell {
         
 
     }
+    
+    func onTapImageView() {
+        print("Tap image")
+    
+        vc.selectedImageUrl = tweet.mediaUrl
+        
+        vc.performSegue(withIdentifier: "showImageInFullScreenSegue", sender: vc)
+    }
+    
+    
+    
+    
     
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -380,6 +401,9 @@ class TweetTableViewCell: UITableViewCell {
             }
         }
     }
+    
+    
+    
 }
 
 extension NSMutableAttributedString {

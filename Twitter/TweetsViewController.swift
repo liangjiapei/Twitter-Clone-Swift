@@ -15,6 +15,8 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var isMoreDataLoading = false
     var loadingMoreView:InfiniteScrollActivityView?
     
+    var selectedImageUrl: URL!
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -118,6 +120,8 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         cell.tweet = tweets[indexPath.row]
         
+        cell.vc = self
+        
         return cell
         
     }
@@ -171,6 +175,19 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 print(error.localizedDescription)
             })
         })
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "showImageInFullScreenSegue" {
+            let destination = segue.destination as! FullScreenImageViewController
+            
+            destination.mediaUrl = self.selectedImageUrl
+            
+        }
+        
+        
         
     }
 

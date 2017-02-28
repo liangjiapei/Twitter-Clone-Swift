@@ -11,6 +11,7 @@
 		5346DBFE1E394504003AD5F6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5346DBFD1E394504003AD5F6 /* User.swift */; };
 		5346DC011E394520003AD5F6 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5346DC001E394520003AD5F6 /* Tweet.swift */; };
 		5366454A1E64B5F7009EC2C0 /* InfiniteScrollActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536645491E64B5F7009EC2C0 /* InfiniteScrollActivityView.swift */; };
+		5366454C1E652439009EC2C0 /* FullScreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5366454B1E652439009EC2C0 /* FullScreenImageViewController.swift */; };
 		536FACC81E392958009982F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536FACC71E392958009982F2 /* AppDelegate.swift */; };
 		536FACCD1E392958009982F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 536FACCB1E392958009982F2 /* Main.storyboard */; };
 		536FACCF1E392958009982F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 536FACCE1E392958009982F2 /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 		5346DBFD1E394504003AD5F6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5346DC001E394520003AD5F6 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		536645491E64B5F7009EC2C0 /* InfiniteScrollActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteScrollActivityView.swift; sourceTree = "<group>"; };
+		5366454B1E652439009EC2C0 /* FullScreenImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenImageViewController.swift; sourceTree = "<group>"; };
 		536FACC41E392958009982F2 /* Twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		536FACC71E392958009982F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		536FACCC1E392958009982F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			children = (
 				536FACD91E393252009982F2 /* LoginViewController.swift */,
 				53B8AEE71E5D1D3F0075FF61 /* TweetsViewController.swift */,
+				5366454B1E652439009EC2C0 /* FullScreenImageViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				53B8AEE81E5D1D3F0075FF61 /* TweetsViewController.swift in Sources */,
 				53B8AEE61E5D0F9D0075FF61 /* TwitterClient.swift in Sources */,
 				5307307B1E63681300A57BAB /* DateStringFormatHelper.swift in Sources */,
+				5366454C1E652439009EC2C0 /* FullScreenImageViewController.swift in Sources */,
 				536FACC81E392958009982F2 /* AppDelegate.swift in Sources */,
 				53B8AEEB1E5D549F0075FF61 /* TweetTableViewCell.swift in Sources */,
 			);

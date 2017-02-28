@@ -88,7 +88,7 @@ world right now</string>
         <!--Tweets View Controller-->
         <scene sceneID="7Bc-FJ-pzs">
             <objects>
-                <viewController id="jRr-dd-lOO" customClass="TweetsViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TweetsViewController" id="jRr-dd-lOO" customClass="TweetsViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cdh-N5-2td"/>
                         <viewControllerLayoutGuide type="bottom" id="d6N-k2-yO3"/>
@@ -152,6 +152,7 @@ world right now</string>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="N0d-B2-gCb">
                                                             <rect key="frame" x="0.0" y="0.0" width="331" height="45.999999999999993"/>
+                                                            <gestureRecognizers/>
                                                         </stackView>
                                                     </subviews>
                                                     <constraints>
@@ -292,11 +293,74 @@ world right now</string>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="O4Z-pN-rQv" id="msg-F5-Wqc"/>
+                        <segue destination="YB5-B0-S5z" kind="presentation" identifier="showImageInFullScreenSegue" modalTransitionStyle="crossDissolve" id="PgM-qU-9fd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLm-Je-Amg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1763.7681159420292" y="136.14130434782609"/>
+        </scene>
+        <!--Full Screen Image View Controller-->
+        <scene sceneID="hAB-oP-qRN">
+            <objects>
+                <viewController id="YB5-B0-S5z" customClass="FullScreenImageViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="s6z-rc-X7N"/>
+                        <viewControllerLayoutGuide type="bottom" id="jpn-Ta-XaZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6Mv-F4-fuR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="3" translatesAutoresizingMaskIntoConstraints="NO" id="Ted-Ta-KS2">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ptl-5r-zHr">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Ptl-5r-zHr" firstAttribute="top" secondItem="Ted-Ta-KS2" secondAttribute="top" id="Skr-qY-F7R"/>
+                                    <constraint firstItem="Ptl-5r-zHr" firstAttribute="centerY" secondItem="Ted-Ta-KS2" secondAttribute="centerY" id="knK-kl-0OW"/>
+                                    <constraint firstItem="Ptl-5r-zHr" firstAttribute="leading" secondItem="Ted-Ta-KS2" secondAttribute="leading" id="of8-iH-2cT"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ptl-5r-zHr" secondAttribute="bottom" id="qzz-J0-amX"/>
+                                    <constraint firstItem="Ptl-5r-zHr" firstAttribute="centerX" secondItem="Ted-Ta-KS2" secondAttribute="centerX" id="tKs-tg-0fY"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ptl-5r-zHr" secondAttribute="trailing" id="vgO-Rt-Rsm"/>
+                                </constraints>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zy3-Be-SS9">
+                                <rect key="frame" x="354" y="52" width="30" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="5kQ-JL-rGh"/>
+                                    <constraint firstAttribute="height" constant="38" id="F0B-EF-a2E"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="exitFullScreen:" destination="YB5-B0-S5z" eventType="touchUpInside" id="xUy-aZ-0ZH"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Ted-Ta-KS2" firstAttribute="leading" secondItem="6Mv-F4-fuR" secondAttribute="leading" id="0PQ-B6-0HV"/>
+                            <constraint firstItem="zy3-Be-SS9" firstAttribute="top" secondItem="s6z-rc-X7N" secondAttribute="bottom" constant="32" id="APa-mi-fd3"/>
+                            <constraint firstItem="jpn-Ta-XaZ" firstAttribute="top" secondItem="Ted-Ta-KS2" secondAttribute="bottom" id="L0w-z4-XWq"/>
+                            <constraint firstAttribute="trailing" secondItem="Ted-Ta-KS2" secondAttribute="trailing" id="Q9k-24-FpZ"/>
+                            <constraint firstItem="Ted-Ta-KS2" firstAttribute="top" secondItem="6Mv-F4-fuR" secondAttribute="top" id="STI-G1-Xkh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zy3-Be-SS9" secondAttribute="trailing" constant="10" id="ZhZ-9S-mxH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="photoImageView" destination="Ptl-5r-zHr" id="C54-2x-ytO"/>
+                        <outlet property="scrollView" destination="Ted-Ta-KS2" id="3Bc-z5-4Ob"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fog-vQ-WvT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2505.7971014492755" y="136.14130434782609"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ku2-mx-wb7">
