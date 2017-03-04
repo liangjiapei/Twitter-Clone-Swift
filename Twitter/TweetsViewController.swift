@@ -15,7 +15,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var isMoreDataLoading = false
     var loadingMoreView:InfiniteScrollActivityView?
     
-    var selectedImageUrl: URL!
+    var selectedImage: UIImage!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -75,7 +75,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         TwitterClient.sharedInstance?.pullToGetNewTweets(success: { (tweets: [Tweet]) in
             
-            for tweet in tweets {
+            for tweet in tweets.reversed() {
                 self.tweets.insert(tweet, at: 0)
             }
             
@@ -154,8 +154,14 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         TwitterClient.sharedInstance?.scrollDownToGetOldTweets(success: { (tweets: [Tweet]) in
             
+            var isFirstTweet = true
+            
             for tweet in tweets {
-                self.tweets.append(tweet)
+                if !isFirstTweet {
+                    self.tweets.append(tweet)
+                } else {
+                    isFirstTweet = false
+                }
             }
             
             
@@ -186,7 +192,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if segue.identifier == "showImageInFullScreenSegue" {
             let destination = segue.destination as! FullScreenImageViewController
             
-            destination.mediaUrl = self.selectedImageUrl
+            destination.image = self.selectedImage
             
         }
         

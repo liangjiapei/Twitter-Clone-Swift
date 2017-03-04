@@ -24,6 +24,9 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var leftImageStackView: UIStackView!
     @IBOutlet weak var rightImageStackView: UIStackView!
     
+    @IBOutlet weak var leftImageStackViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightImageStackViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageStackTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageStackHeightConstraint: NSLayoutConstraint!
     var isFavorite = false
     var isRetweeted = false
@@ -36,6 +39,7 @@ class TweetTableViewCell: UITableViewCell {
         didSet {
             
             updateUI()
+            print("Did set tweet")
             
         }
     }
@@ -48,14 +52,26 @@ class TweetTableViewCell: UITableViewCell {
         // Rounded corner profile image view
         profileImageView.layer.cornerRadius = 5
         profileImageView.clipsToBounds = true
+        leftImageStackView.distribution = .fill
+        rightImageStackView.distribution = .fill
+        imageStackView.distribution = .fill
+        
+        imageStackHeightConstraint.constant = imageStackView.frame.width * 0.6
+        
+        self.layoutIfNeeded()
+        
+        print("awakeFromNib")
+    
     }
     
     
     
-    func onTapImageView() {
+    func onTapImageView(sender : UITapGestureRecognizer) {
         print("Tap image")
     
-        vc.selectedImageUrl = tweet.mediaUrl
+        let imageView = sender.view as! UIImageView
+        
+        vc.selectedImage = imageView.image
         
         vc.performSegue(withIdentifier: "showImageInFullScreenSegue", sender: vc)
     }
@@ -254,32 +270,127 @@ class TweetTableViewCell: UITableViewCell {
             view.removeFromSuperview()
         }
         
-        /*
-         for view in rightImageStackView.subviews {
-         view.removeFromSuperview()
-         }
-         */
+        
+        for view in rightImageStackView.subviews {
+            view.removeFromSuperview()
+        }
+        
+        imageStackHeightConstraint.constant = imageStackView.frame.width * 0.6
+        
+        leftImageStackViewWidthConstraint.constant = imageStackView.frame.width
+        rightImageStackViewWidthConstraint.constant = 0
+        
+        self.layoutIfNeeded()
         
         if tweet.media != nil {
-            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImageView))
             
-            imageStackHeightConstraint.constant = imageStackView.frame.width * 0.6
+            print("has \(tweet.media!.count) photos")
             
             imageStackView.distribution = .fill
             
-            let imageView1 = UIImageView(image: UIImage(named: "default_image"))
-            imageView1.contentMode = .scaleAspectFill
-            imageView1.clipsToBounds = true
-            imageView1.layer.cornerRadius = 10
-            imageView1.isUserInteractionEnabled = true
-            imageView1.addGestureRecognizer(tapRecognizer)
-            
-            
-            if let mediaUrl = tweet.mediaUrl {
-                imageView1.setImageWith(mediaUrl)
+            if let media1Url = tweet.media1Url {
                 
+                
+                
+                
+                let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImageView))
+                
+                let imageView1 = UIImageView(image: UIImage(named: "default_image"))
+                imageView1.contentMode = .scaleAspectFill
+                imageView1.clipsToBounds = true
+                imageView1.layer.cornerRadius = 5
+                imageView1.isUserInteractionEnabled = true
+                imageView1.addGestureRecognizer(tapRecognizer)
+                
+                imageView1.setImageWith(media1Url)
+                
+                leftImageStackView.distribution = .fill
                 leftImageStackView.addArrangedSubview(imageView1)
+                
+                leftImageStackViewWidthConstraint.constant = imageStackView.frame.width
+                rightImageStackViewWidthConstraint.constant = 0
+                
+                self.layoutIfNeeded()
+                
+                print("left image stack view width is \(leftImageStackView.frame.size.width)")
+                print("left image stack view height is \(leftImageStackView.frame.size.height)")
+                print("right image stack view width is \(rightImageStackView.frame.size.width)")
+                
+                print("left image width is \(leftImageStackView.subviews[0].frame.width)")
+                print("left image height is \(leftImageStackView.subviews[0].frame.height)")
             }
+            
+            if let media2Url = tweet.media2Url {
+                
+                print("Has second image")
+                
+                leftImageStackViewWidthConstraint.constant = imageStackView.frame.width * 0.5
+                rightImageStackViewWidthConstraint.constant = imageStackView.frame.width * 0.5
+                
+                self.layoutIfNeeded()
+                
+                let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImageView))
+                
+                let imageView2 = UIImageView(image: UIImage(named: "default_image"))
+                imageView2.contentMode = .scaleAspectFill
+                imageView2.clipsToBounds = true
+                imageView2.layer.cornerRadius = 5
+                imageView2.isUserInteractionEnabled = true
+                imageView2.addGestureRecognizer(tapRecognizer)
+                
+                imageView2.setImageWith(media2Url)
+                rightImageStackView.addArrangedSubview(imageView2)
+                
+                imageStackView.distribution = .fillEqually
+            }
+            
+            if let media3Url = tweet.media3Url {
+                
+                print("Has third image")
+                
+                let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImageView))
+                
+                let imageView3 = UIImageView(image: UIImage(named: "default_image"))
+                imageView3.contentMode = .scaleAspectFill
+                imageView3.clipsToBounds = true
+                imageView3.layer.cornerRadius = 5
+                imageView3.isUserInteractionEnabled = true
+                imageView3.addGestureRecognizer(tapRecognizer)
+                imageView3.setImageWith(media3Url)
+                
+                if let media4Url = tweet.media4Url {
+                    
+                    print("Has fourth image")
+                    
+                    let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImageView))
+                    
+                    let imageView4 = UIImageView(image: UIImage(named: "default_image"))
+                    imageView4.contentMode = .scaleAspectFill
+                    imageView4.clipsToBounds = true
+                    imageView4.layer.cornerRadius = 5
+                    imageView4.isUserInteractionEnabled = true
+                    imageView4.addGestureRecognizer(tapRecognizer)
+                    imageView4.setImageWith(media4Url)
+                    
+                    leftImageStackView.addArrangedSubview(imageView3)
+                    rightImageStackView.addArrangedSubview(imageView4)
+                    
+                    
+                    
+                } else {
+                
+                    rightImageStackView.addArrangedSubview(imageView3)
+                    
+                }
+                
+                imageStackView.distribution = .fillEqually
+                leftImageStackView.distribution = .fillEqually
+                rightImageStackView.distribution = .fillEqually
+                self.layoutIfNeeded()
+        
+            }
+            
+            
         } else {
             imageStackHeightConstraint.constant = 0
         }

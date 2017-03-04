@@ -26,8 +26,15 @@ class Tweet: NSObject {
     var displayUrl: String?
     var expandedUrl: String?
     var created_at: String?
+    
+    var extendedEntrities: NSDictionary?
+    
     var media: NSDictionary?
-    var mediaUrl: URL?
+    var media1Url: URL?
+    var media2Url: URL?
+    var media3Url: URL?
+    var media4Url: URL?
+    
     
     init(dictionary: NSDictionary) {
         print(dictionary)
@@ -51,12 +58,34 @@ class Tweet: NSObject {
             expandedUrl = urls!["expanded_url"] as? String
         }
         
-        let mediaTemp = entities?["media"] as? NSArray
+        extendedEntrities = dictionary["extended_entities"] as? NSDictionary
+        
+        let mediaTemp = extendedEntrities?["media"] as? NSArray
         
         if mediaTemp != nil && mediaTemp?.count != 0 {
-            media = mediaTemp![0] as! NSDictionary
-            let mediaUrlString = media!["media_url"] as! String
-            mediaUrl = URL(string: mediaUrlString)!
+            if mediaTemp!.count >= 1 {
+                media = mediaTemp![0] as! NSDictionary
+                let mediaUrlString = media!["media_url_https"] as! String
+                media1Url = URL(string: mediaUrlString)!
+            }
+            
+            if mediaTemp!.count >= 2 {
+                media = mediaTemp![1] as! NSDictionary
+                let mediaUrlString = media!["media_url_https"] as! String
+                media2Url = URL(string: mediaUrlString)!
+            }
+            
+            if mediaTemp!.count >= 3 {
+                media = mediaTemp![2] as! NSDictionary
+                let mediaUrlString = media!["media_url_https"] as! String
+                media3Url = URL(string: mediaUrlString)!
+            }
+            
+            if mediaTemp!.count >= 4 {
+                media = mediaTemp![3] as! NSDictionary
+                let mediaUrlString = media!["media_url_https"] as! String
+                media4Url = URL(string: mediaUrlString)!
+            }
         }
         
         

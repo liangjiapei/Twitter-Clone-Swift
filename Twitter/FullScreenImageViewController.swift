@@ -16,6 +16,8 @@ class FullScreenImageViewController: UIViewController, UIScrollViewDelegate {
     
     var mediaUrl: URL!
     
+    var image: UIImage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,7 +35,7 @@ class FullScreenImageViewController: UIViewController, UIScrollViewDelegate {
         
         scrollView.zoomScale = 1.001
         
-        photoImageView.setImageWith(mediaUrl!)
+        photoImageView.image = image
     }
     
     override func didReceiveMemoryWarning() {
