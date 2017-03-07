@@ -98,7 +98,7 @@ The following **additional** features are implemented:
 
 - [X] Able to display 2~4 images
 - [X] Added tool bar in compose and reply view
-
+- [X] Disable tweet button when no new content is entered
 
 
 
