@@ -17,7 +17,18 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var selectedImage: UIImage!
     
+    var replyTweetIndexPath: IndexPath!
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.view.backgroundColor = UIColor.white
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,6 +134,8 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         cell.tweet = tweets[indexPath.row]
         
+        cell.indexPath = indexPath
+        
         cell.vc = self
         
         return cell
@@ -193,6 +206,42 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let destination = segue.destination as! FullScreenImageViewController
             
             destination.image = self.selectedImage
+            
+        } else if segue.identifier == "showTweetDetailSegue" {
+            
+            let destination = segue.destination as! TweetDetailTableViewController
+            
+            if let indexPath = tableView.indexPathForSelectedRow {
+                if let tweet = self.tweets[indexPath.row] as? Tweet {
+                    destination.tweet = tweet
+                    destination.tweetsViewController = self
+                }
+                self.tableView.deselectRow(at: indexPath, animated: true)
+            }
+            
+            
+            
+        } else if segue.identifier == "composeNewTweetSegue" {
+            
+            let destination = segue.destination as! ComposeViewController
+            
+            destination.tweetsViewController = self
+            
+        } else if segue.identifier == "showReplyViewSegue" {
+            
+            let destination = segue.destination as! ReplyViewController
+            
+            destination.tweetsViewController = self
+            
+            if let indexPath = replyTweetIndexPath {
+                if let tweet = self.tweets[indexPath.row] as? Tweet {
+                    // destination.tweetTextview.text = ("@\(tweet.screenName!) ")
+                    print("Tweet: \(tweet)")
+                    destination.tweetId = tweet.id
+                    destination.screenName = tweet.screenName
+                }
+                self.tableView.deselectRow(at: indexPath, animated: true)
+            }
             
         }
         

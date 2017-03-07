@@ -14,6 +14,13 @@ class User: NSObject {
     var screenname: String?
     var profileUrl: URL?
     var tagline: String?
+    var followerCount: Int?
+    var followingCount: Int?
+    var entities: NSDictionary?
+    var entitiesUrl: NSDictionary?
+    var urls: NSDictionary?
+    var displayUrl: String?
+    var tweetsCount: Int?
     
     var dictionary: NSDictionary?
     
@@ -21,15 +28,34 @@ class User: NSObject {
         
         self.dictionary = dictionary
         
+        print("User dictionary: \(dictionary)")
+        
         name = dictionary["name"] as? String
         screenname = dictionary["screen_name"] as? String
         
         let profileUrlString = dictionary["profile_image_url_https"] as? String
         if let profileUrlString = profileUrlString {
             profileUrl = URL(string: profileUrlString)
+            print("Profile image url: \(profileUrlString)")
         }
         
         tagline = dictionary["description"] as? String
+        
+        tweetsCount = dictionary["statuses_count"] as? Int
+        
+        /*
+        entities = dictionary["entities"] as? NSDictionary
+        
+        let urlTemp = entities?["url"] as? NSDictionary
+        
+        if urlTemp != nil {
+            urls = urlTemp![0] as! NSDictionary
+            displayUrl = urls!["display_url"] as? String
+        }
+        */
+        
+        followerCount = dictionary["followers_count"] as? Int
+        followingCount = dictionary["friends_count"] as? Int
         
     }
 

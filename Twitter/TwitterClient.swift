@@ -160,7 +160,47 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     
+    func compose(status: String, success: @escaping (NSDictionary) -> (), failure: @escaping (Error) -> ()) {
+        
+        post("https://api.twitter.com/1.1/statuses/update.json", parameters: ["status": status], progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            
+            if let response = response {
+                
+                let tweet = response as! NSDictionary
+                
+                TwitterClient.since_id = tweet["id"] as? Int
+                
+                success(tweet)
+            }
+            
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            
+            failure(error)
+            
+        })
+        
+    }
     
+    func reply(status: String, replyId: Int, success: @escaping (NSDictionary) -> (), failure: @escaping (Error) -> ()) {
+        
+        post("https://api.twitter.com/1.1/statuses/update.json", parameters: ["status": status, "in_reply_to_status_id": replyId], progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            
+            if let response = response {
+                
+                let tweet = response as! NSDictionary
+                
+                TwitterClient.since_id = tweet["id"] as? Int
+                
+                success(tweet)
+            }
+            
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            
+            failure(error)
+            
+        })
+        
+    }
     
     
     func favorite(id: Int, success: @escaping (NSDictionary) -> (), failure: @escaping (Error) -> ()) {

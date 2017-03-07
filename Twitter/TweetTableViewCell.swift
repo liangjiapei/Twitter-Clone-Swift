@@ -31,6 +31,8 @@ class TweetTableViewCell: UITableViewCell {
     var isFavorite = false
     var isRetweeted = false
     
+    var indexPath: IndexPath!
+    
     var vc: TweetsViewController!
     
     var hasTweetTextView = false
@@ -88,6 +90,10 @@ class TweetTableViewCell: UITableViewCell {
     
     @IBAction func onReplyButton(_ sender: Any) {
         print("Reply button tapped")
+        
+        vc.replyTweetIndexPath = self.indexPath
+        
+        vc.performSegue(withIdentifier: "showReplyViewSegue", sender: vc)
     }
     
     
@@ -487,6 +493,8 @@ class TweetTableViewCell: UITableViewCell {
         
         if let profileUrl = tweet.profileImageUrl {
             profileImageView.setImageWith(profileUrl)
+            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapProfileImageView))
+            profileImageView.addGestureRecognizer(tapRecognizer)
         }
         
         // tweetTextLabel.text = tweet.text
@@ -526,6 +534,11 @@ class TweetTableViewCell: UITableViewCell {
         }
         
     }
+    
+    func onTapProfileImageView() {
+        vc.performSegue(withIdentifier: "tapAvatarToProfileSegue", sender: vc)
+    }
+    
 }
 
 extension NSMutableAttributedString {
