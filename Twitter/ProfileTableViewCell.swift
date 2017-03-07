@@ -28,7 +28,7 @@ class ProfileTableViewCell: UITableViewCell {
         avatarImageView.setImageWith((User.currentUser?.profileUrl)!)
         nameLabel.text = User.currentUser?.name
         if let screenName = User.currentUser?.screenname {
-            screenNameLabel.text = "@\(screenName))"
+            screenNameLabel.text = "@\(screenName)"
         }
         
         if let followerCount = User.currentUser?.followerCount {
